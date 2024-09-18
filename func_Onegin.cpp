@@ -30,14 +30,6 @@ _Bool Check_Characters (char sym);
 int Process_Onegin (void);
 
 
-
-int main ()
-{
-
-    return Process_Onegin ();
-}
-
-
 //void Clean_Arr_Onegin (char* text_Onegin)
 //{
 int Process_Onegin (void)
@@ -111,6 +103,7 @@ int Buble_Sort (const char* filename_read , const char* filename_write , My_Comp
     }
 
     free (text_Onegin);
+    fclose (fh);
 
     return 0;
 }
@@ -144,7 +137,7 @@ int My_Compare_Str_Alphabetically (const char* str1 , const char* str2)  // cons
 
             return 1;
 
-        if (toupper (*str1) != toupper (*str2)) {
+        if (toupper (*str1) != toupper (*str2) /*&& isalpha (*str1)*/   ) {
 
             return (toupper (*str1) > toupper (*str2)) ? 1 : -1;
         }
@@ -228,7 +221,7 @@ int Size_Onegin (FILE* fp , struct Text* Onegin) // assert
 
     Onegin->size = buf.st_size; // +1
 
-    return 0;
+    return 0 ;
 }
 
 
@@ -248,7 +241,7 @@ int Num_Lines_File (FILE* fp , struct Text* Onegin)
 
     Onegin->num_lines = num_lines;
 
-    return num_lines;
+    return 0;
 }
 
 
