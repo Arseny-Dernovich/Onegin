@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-#include <assert.h>
-#include <sys/stat.h>
-
-#include "some.h"
+#include "My_features.h"
 
 int Process_Onegin (Text* Onegin , int* sort_type);
 void print_usage();
@@ -14,14 +6,16 @@ void print_usage();
 
 int main (int argc, char* argv[])
 {
+    my_assert (argv == NULL);
+
     struct Text Onegin = {};
 
     if (argc != 3) {
 
-        printf("Ошибка: необходимо указать тип сортировки.\n");
+        printf("Ошибка:\n");
         print_usage();
 
-        return 1;
+        return incomplete_value;
     }
 
     int sort_type[2] = {atoi (argv[1]) , atoi (argv[2])};
@@ -31,12 +25,12 @@ int main (int argc, char* argv[])
         printf("Ошибка: некорректный выбор типа сортировки.\n");
         print_usage();
 
-        return 1;
+        return incomplete_value;
     }
 
     Process_Onegin (&Onegin, sort_type);
 
-    return 0;
+    return complete_value;
 }
 
 

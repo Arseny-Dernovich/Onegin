@@ -1,4 +1,4 @@
-#include "some.h"
+#include "My_features.h"
 
 int Calculate_Size_File (FILE* fp , struct Text* Onegin);
 int Calculate_Num_Lines_File (FILE* fp , struct Text* Onegin);
@@ -8,7 +8,6 @@ FILE* Open_File (const char* filename_read);
 struct Inf_Lines* Filling_Arr_Structs (Text* Onegin)
 {
     my_assert (Onegin == NULL);
-
 
     FILE* fp = Open_File ("Clean_Onegin.txt");
 

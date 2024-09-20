@@ -1,15 +1,12 @@
-
-#include "some.h"
+#include "My_features.h"
 
 _Bool Check_Characters (char sym);
 
 
-
 int My_Compare_Str_Alphabetically (struct Inf_Lines struct1 , struct Inf_Lines struct2)  // const assert
 {
-
-    my_assert (struct1.str == 0);
-    my_assert (struct2.str == 0);
+    my_assert (struct1.str == NULL);
+    my_assert (struct2.str == NULL);
 
     while (*struct1.str != '\0' || *struct2.str != '\0') {
 
@@ -44,26 +41,20 @@ int My_Compare_Str_Alphabetically (struct Inf_Lines struct1 , struct Inf_Lines s
 
     return complete_value;
 }
-
-/*
- * функция возащает ...
- */
+//----------------------------------------------------------------------------------------------------------------------
 int My_Compare_Str_Rhyme (struct Inf_Lines struct1, struct Inf_Lines struct2)
 {
-    my_assert (struct1.str == 0);
-    my_assert (struct2.str == 0);
-
+    my_assert (struct1.str == NULL);
+    my_assert (struct2.str == NULL);
 
     while (struct1.len > 0 && struct2.len > 0) {
 
-        while (struct1.len > 0 && Check_Characters (struct1.str[struct1.len - 1]) ) { // copypaste
+        while (struct1.len > 0 && Check_Characters (struct1.str[struct1.len - 1]) ) {
 
             struct1.len--;
         }
 
-        // len_struct1.str -= foo ();
-
-        while (struct2.len > 0 && Check_Characters (struct2.str[struct2.len - 1])) { // copypaste
+        while (struct2.len > 0 && Check_Characters (struct2.str[struct2.len - 1])) {
 
             struct2.len--;
         }
@@ -94,7 +85,7 @@ int My_Compare_Str_Rhyme (struct Inf_Lines struct1, struct Inf_Lines struct2)
 
     return complete_value;
 }
-
+//-------------------------------------------------------------------------------
 _Bool Check_Characters (char sym)
 {
     return (isspace (sym) || ispunct (sym) || isdigit (sym));
