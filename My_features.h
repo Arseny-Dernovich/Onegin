@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 
 
+
+
 #ifndef NDEBUG
 
 
@@ -25,11 +27,11 @@
 #endif
 
 
-typedef int (*My_Compare) (struct Inf_Lines struct1 , struct Inf_Lines struct2);
+typedef int (*My_Compare) (const void* point1 , const void* point2);
 
 struct Text {
-size_t size , num_lines ;
-char * text_Onegin;
+    size_t size , num_lines ;
+    char * text_Onegin;
 };
 
 struct Inf_Lines {
@@ -37,17 +39,20 @@ struct Inf_Lines {
     size_t len;
 };
 
+struct Arr_Structs {
+    struct Inf_Lines* arr_structs;
+};
 
 
 enum indicators_progress { // индикаторы выполнениия
-complete_value = 0 ,
-incomplete_value = 1 ,
+    complete_value = 0 ,
+    incomplete_value = 1 ,
 };
 
 enum indicators_compare {  // индикаторы сравнения
-str1_longer_str2 = 1 ,
-str2_longer_str1 = -1 ,
-str1_equals_str2 = 3802
+    str1_longer_str2 = 1 ,
+    str2_longer_str1 = -1 ,
+    str1_equals_str2 = 3802
 };
 
 enum Sort_Type {           // индикаторы типа сортировки
@@ -65,6 +70,19 @@ const char* const blue_dark_flash = "\033[5;34;40m";
 const char* const green           = "\033[3;32;40m";
 const char* const end             = "\033[0m";
 
+int Calculate_Size_File (FILE* fp , struct Text* Onegin);
+int Calculate_Num_Lines_File (FILE* fp , struct Text* Onegin);
+char* Converting_Text_to_Arr (Text* Onegin , FILE* fp);
+FILE* Open_File (const char* filename_read);
+int Write_Sort_Files (const char* filename_write , struct Inf_Lines* arr_structs , Text* Onegin);
+struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr);
+void* Bubble_Sort (void* arr , Text* Onegin , int el_size , int type_compare , My_Compare My_compare );
+int My_Compare_Str_Alphabetically (const void* point1, const void* point2);
+int My_Compare_Str_Rhyme (const void* point1, const void* point2);
+int Process_Onegin (Text* Onegin , int* sort_type);
+_Bool Check_Characters (char sym);
+void print_usage ();
+void Print_Array_Structs (struct Inf_Lines* arr_structs, size_t num_lines);
 
 
 

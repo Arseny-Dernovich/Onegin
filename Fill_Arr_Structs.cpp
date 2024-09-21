@@ -1,11 +1,8 @@
 #include "My_features.h"
 
-int Calculate_Size_File (FILE* fp , struct Text* Onegin);
-int Calculate_Num_Lines_File (FILE* fp , struct Text* Onegin);
-char* Converting_Text_to_Arr (Text* Onegin , FILE* fp);
-FILE* Open_File (const char* filename_read);
 
-struct Inf_Lines* Filling_Arr_Structs (Text* Onegin)
+
+struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr)
 {
     my_assert (Onegin == NULL);
 
@@ -17,9 +14,9 @@ struct Inf_Lines* Filling_Arr_Structs (Text* Onegin)
 
     fclose (fp);
 
-    struct Inf_Lines* arr_structs = (struct Inf_Lines*) calloc (Onegin->num_lines , sizeof (struct Inf_Lines));
+    arr->arr_structs = (struct Inf_Lines*) calloc (Onegin->num_lines , sizeof (struct Inf_Lines));
 
-    my_assert (arr_structs == NULL);
+    my_assert (arr->arr_structs == NULL);
 
     size_t line_count = 0;
 
@@ -33,8 +30,8 @@ struct Inf_Lines* Filling_Arr_Structs (Text* Onegin)
 
             if (line_count < Onegin->num_lines) {
 
-                arr_structs[line_count].str = line_start;
-                arr_structs[line_count].len = strlen (line_start);
+                arr->arr_structs[line_count].str = line_start;
+                arr->arr_structs[line_count].len = strlen (line_start);
 
                 line_count++;
 
@@ -43,5 +40,8 @@ struct Inf_Lines* Filling_Arr_Structs (Text* Onegin)
         }
     }
 
-    return arr_structs;
+
+
+
+    return arr->arr_structs;
 }

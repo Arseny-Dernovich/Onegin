@@ -12,14 +12,30 @@ typedef int (*My_Compare) (const char* str1 , const char* str2);
 
 struct Text {
 size_t size , num_lines ;
-char** index;
+char** index; // rename
 };
 
-// void звменить чтобы проверить статус операции
+struct Inf_lines {
+    const char* str; // const
+    size_t len;
+};
+
+// массив структур
 
 
-int Size_Onegin (FILE* fp , struct Text* Onegin);
-int Num_Lines_File (FILE* fp , struct Text* Onegin);
+//       old  | new
+// 0x100 50   | 150
+// 0x250 150  | -50
+// 0x150 100  | 250
+// 0x400 ???  | ???
+
+
+int Process_Onegin (void);
+// static
+// argc argv прата
+// z y r a
+
+
 int My_Compare_Str_Alphabetically (const char* str1 , const char* str2);
 int My_Compare_Str_Rhyme (const char* str1 , const char* str2);
 char* Converting_Text_to_Arr (Text* Onegin , FILE* fp);
@@ -27,7 +43,8 @@ char* Fill_Index_Arr (char* text_Onegin ,Text Onegin);
 char** Filling_Arr_Index (char* text_Onegin , Text* Onegin);
 int Buble_Sort (const char* filename_read , const char* filename_write , My_Compare My_compare_Str);
 _Bool Check_Characters (char sym);
-int Process_Onegin (void);
+
+
 
 
 //void Clean_Arr_Onegin (char* text_Onegin)
@@ -35,17 +52,33 @@ int Process_Onegin (void);
 int Process_Onegin (void)
 {
     if (Buble_Sort ("Clean_Onegin.txt" , "sort_rhyme_Onegin.txt" , &My_Compare_Str_Rhyme) == 0 &&
-        Buble_Sort ("Clean_Onegin.txt" , "sort_alpha_Onegin.txt" , &My_Compare_Str_Alphabetically) == 0)
+        Buble_Sort ("Clean_Onegin.txt" , "sort_alpha_Onegin.txt" , &My_Compare_Str_Alphabetically) == 0) // save return value
 
         return 0;
 
     else
 
         return 1;
+
+    struct String
+    {
+        char* ptr;
+        int len;
+    };
+
+    struct String array[size] = {};
+
+    for (int i = 0; i < size; i++){
+        array[i].ptr = 0x...;
+    }
+    for (int i = 0; i < size; i++){
+        array[i].len = array[i].str - array[i-1].str;
+    }
+
 }
 
 
-int Buble_Sort (const char* filename_read , const char* filename_write , My_Compare My_Compare_Str )
+int Buble_Sort (const char* filename_read , const char* filename_write , My_Compare My_Compare_Str ) // ptr
 {
     my_assert (filename_read == 0);
     my_assert (filename_write == 0);
@@ -59,27 +92,38 @@ int Buble_Sort (const char* filename_read , const char* filename_write , My_Comp
     if (fp == NULL) {
 
         printf ("Error: Oткрыть файл %s не удалось" , filename_read);
-        perror (" ");
+        perror ("EDA");
 
         return errno;
     }
 
 
-    Size_Onegin (fp , &Onegin);
-    Num_Lines_File (fp , &Onegin);
+    Size_Onegin (fp , &Onegin); // VERB
+    Num_Lines_File (fp , &Onegin); // VERB
 
 
-    char* text_Onegin = Converting_Text_to_Arr (&Onegin , fp);
-    Filling_Arr_Index (text_Onegin , &Onegin);
+    char* text_Onegin = Converting_Text_to_Arr (&Onegin , fp); // ing
+    Filling_Arr_Index (text_Onegin , &Onegin); // fill
 
 // optimization
     for (size_t i = 0 ; i < Onegin.num_lines ; i++) {
         for (size_t j = 0 ; j < Onegin.num_lines-1 ; j++) {
-            if ((*My_Compare_Str) (Onegin.index[j] , Onegin.index[j+1]) == 1) {
+            if ((*My_Compare_Str) (Onegin.index[j] , Onegin.index[j+1]) == 1) { // enum
 
-                char* tp = Onegin.index[j];
+                char* tmp = Onegin.index[j];
                 Onegin.index[j] = Onegin.index[j+1];
-                Onegin.index[j+1] = tp;
+                Onegin.index[j+1] = tmp;
+            }
+        }
+    }
+
+    for (size_t i = 0 ; i < Onegin.num_lines ; i++) {
+        for (size_t j = 0 ; j < Onegin.num_lines-1 ; j++) {
+            if ((*My_Compare_Str) (Onegin.index[j] , Onegin.index[j+1]) == -1) { // BAN
+
+                char* tmp = Onegin.index[j];
+                Onegin.index[j] = Onegin.index[j+1];
+                Onegin.index[j+1] = tmp;
             }
         }
     }
@@ -131,13 +175,13 @@ int My_Compare_Str_Alphabetically (const char* str1 , const char* str2)  // cons
 
         if (*str1 == '\0')
 
-            return -1;
+            return -1; // enum
 
         if (*str2 == '\0')
 
-            return 1;
+            return 1; // enum
 
-        if (toupper (*str1) != toupper (*str2) /*&& isalpha (*str1)*/   ) {
+        if (toupper (*str1) != toupper (*str2)) {
 
             return (toupper (*str1) > toupper (*str2)) ? 1 : -1;
         }
@@ -160,17 +204,16 @@ int My_Compare_Str_Rhyme (const char* str1, const char* str2)
     size_t len_str1 = strlen (str1);
     size_t len_str2 = strlen (str2);
 
-
     while (len_str1 > 0 && len_str2 > 0) {
 
-        while (len_str1 > 0 && Check_Characters (str1[len_str1 - 1]) ) {
+        while (len_str1 > 0 && Check_Characters (str1[len_str1 - 1]) ) { // copypaste
 
             len_str1--;
         }
 
         // len_str1 -= foo ();
 
-        while (len_str2 > 0 && Check_Characters (str2[len_str2 - 1])) {
+        while (len_str2 > 0 && Check_Characters (str2[len_str2 - 1])) { // copypaste
 
             len_str2--;
         }
@@ -221,12 +264,15 @@ int Size_Onegin (FILE* fp , struct Text* Onegin) // assert
 
     Onegin->size = buf.st_size; // +1
 
-    return 0 ;
+    return 0;
 }
 
 
 int Num_Lines_File (FILE* fp , struct Text* Onegin)
 {
+    my_assert (fp == 0);
+    my_assert (Onegin == 0);
+
     size_t num_lines = 0;
     int ch = 0;
 
@@ -241,7 +287,7 @@ int Num_Lines_File (FILE* fp , struct Text* Onegin)
 
     Onegin->num_lines = num_lines;
 
-    return 0;
+    return num_lines;
 }
 
 
@@ -288,8 +334,6 @@ char** Filling_Arr_Index (char* text_Onegin , Text* Onegin)
 
                 Onegin->index [line_count] = &text_Onegin[i+1];
                 line_count++;
-
-
             }
         }
     }
@@ -302,42 +346,3 @@ _Bool Check_Characters (char sym)
 {
     return (isspace (sym) || ispunct (sym) || isdigit (sym));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

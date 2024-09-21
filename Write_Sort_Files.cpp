@@ -21,7 +21,7 @@ int Write_Sort_Files (const char* filename_write , struct Inf_Lines* arr_structs
 
     for (size_t i = 0 ; i < Onegin->num_lines ; i++) {
 
-        fputs (arr_structs[i].str ,fh );
+        fputs (arr_structs[i].str , fh);
         fputc ('\n' , fh);
     }
 

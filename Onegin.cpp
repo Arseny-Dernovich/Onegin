@@ -1,11 +1,8 @@
 #include "My_features.h"
 
-struct Inf_Lines* Bubble_Sort (My_Compare My_Compare_Str , Text* Onegin , int type_compare);
-int My_Compare_Str_Alphabetically (struct Inf_Lines struct1 , struct Inf_Lines struct2);
-int My_Compare_Str_Rhyme (struct Inf_Lines struct1, struct Inf_Lines struct2);
-int Write_Sort_Files (const char* filename_write , struct Inf_Lines* arr_structs , Text* Onegin);
 
-void print_usage()
+
+void print_usage ()
 {
     printf("%sИспользование программы:\n" , blue);
     printf("./program_name <тип сортировки> <тип сравнения>\n");
@@ -15,63 +12,65 @@ void print_usage()
     printf ("%s" , end);
 }
 //---------------------------------------------------------------------------------------------
-int Process_Onegin (Text* Onegin , int* sort_type)
-{
-    my_assert (Onegin == NULL);
-    my_assert (sort_type == NULL);
+
+
+int Process_Onegin(Text* Onegin, int* sort_type) {
+    my_assert(Onegin == NULL);
+    my_assert(sort_type == NULL);
 
     struct Inf_Lines* sort_arr_structs = NULL;
+    struct Arr_Structs arr = {};
 
+    Filling_Arr_Structs (Onegin, &arr);
 
     if (sort_type[0] == SORT_ALPHABETICALLY) {
 
         if (sort_type[1] == INCRE) {
 
-            sort_arr_structs = Bubble_Sort (&My_Compare_Str_Alphabetically , Onegin ,INCRE);
+            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(arr.arr_structs[0]) , INCRE , My_Compare_Str_Alphabetically);
             Write_Sort_Files ("Sort_Alpha_Incr_Onegin.txt" , sort_arr_structs , Onegin);
-        }
 
-        else if (sort_type[1] == DECRE) {
+        } else if (sort_type[1] == DECRE) {
 
-            sort_arr_structs = Bubble_Sort (&My_Compare_Str_Alphabetically , Onegin , DECRE);
+            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(Inf_Lines) , DECRE , My_Compare_Str_Alphabetically);
             Write_Sort_Files ("Sort_Alpha_Decre_Onegin.txt" , sort_arr_structs , Onegin);
-        }
 
-        else
+        } else {
 
+            printf ("Ошибка: некорректный выбор типа сравнения.\n");
             print_usage ();
-
+        }
     }
 
     else if (sort_type[0] == SORT_BY_RHYME) {
 
         if (sort_type[1] == INCRE) {
 
-            sort_arr_structs = Bubble_Sort (&My_Compare_Str_Rhyme , Onegin , INCRE);
-            Write_Sort_Files ("Sort_Rhyme_Incre_Onegin.txt" , sort_arr_structs , Onegin);
-        }
+            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(Inf_Lines) , INCRE , My_Compare_Str_Rhyme);
+            Write_Sort_Files ("Sort_Rhyme_Incre_Onegin.txt" , sort_arr_structs, Onegin);
 
-        else if (sort_type[1] == DECRE) {
+        } else if (sort_type[1] == DECRE) {
 
-            sort_arr_structs = Bubble_Sort (&My_Compare_Str_Rhyme , Onegin , DECRE);
+            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin, sizeof(Inf_Lines) , DECRE , My_Compare_Str_Rhyme);
             Write_Sort_Files ("Sort_Rhyme_Decre_Onegin.txt" , sort_arr_structs , Onegin);
+
+        } else {
+
+            printf ("Ошибка: некорректный выбор типа сравнения.\n");
+            print_usage ();
         }
 
-        else
+    } else {
 
-            print_usage ();
-    }
-
-    else {
-
-        printf("Ошибка: некорректный выбор типа сортировки.\n\n");
-        print_usage();
+        printf ("Ошибка: некорректный выбор типа сортировки.\n");
+        print_usage ();
 
         return incomplete_value;
     }
 
+
+
     return complete_value;
 }
-
 
 

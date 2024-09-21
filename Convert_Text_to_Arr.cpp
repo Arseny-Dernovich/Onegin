@@ -8,8 +8,6 @@
 
 #include "My_features.h"
 
-
-
 char* Converting_Text_to_Arr (Text* Onegin , FILE* fp)
 {
     my_assert (Onegin == NULL);
