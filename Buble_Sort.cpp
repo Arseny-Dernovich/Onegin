@@ -9,9 +9,11 @@ void Print_Array_Structs (struct Inf_Lines* arr_structs, size_t num_lines) {
         printf("Строка %zu: %s\n", i + 1, arr_structs[i].str);
     }
 }
-void* Bubble_Sort(void* arr , Text* Onegin , int el_size, int type_compare , My_Compare My_compare) {
-    my_assert(My_compare == NULL);
-    my_assert(arr == NULL);
+void* Bubble_Sort (void* arr , Text* Onegin , int el_size, int type_compare , My_Compare My_compare)
+{
+    my_assert (My_compare == NULL);
+    my_assert (arr == NULL);
+    my_assert (Onegin == NULL);
 
     //printf("Массив до сортировки внутри Bubble_Sort:\n");
 
@@ -35,10 +37,10 @@ void* Bubble_Sort(void* arr , Text* Onegin , int el_size, int type_compare , My_
 
 
     //printf("Массив после сортировки:\n");
-    /*for (size_t i = 0; i < Onegin->num_lines; i++) {
+    /*for (size_t i = 0 ; i < Onegin->num_lines ; i++) {
 
         struct Inf_Lines* element = (struct Inf_Lines*)((char*)arr + i * el_size);
-        printf("Строка %zu: %s\n", i + 1, element->str);
+        printf ("Строка %zu: %s\n", i + 1, element->str);
     }*/
 
     return arr;

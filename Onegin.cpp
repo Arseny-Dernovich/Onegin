@@ -15,8 +15,8 @@ void print_usage ()
 
 
 int Process_Onegin(Text* Onegin, int* sort_type) {
-    my_assert(Onegin == NULL);
-    my_assert(sort_type == NULL);
+    my_assert (Onegin == NULL);
+    my_assert (sort_type == NULL);
 
     struct Inf_Lines* sort_arr_structs = NULL;
     struct Arr_Structs arr = {};
@@ -25,9 +25,10 @@ int Process_Onegin(Text* Onegin, int* sort_type) {
 
     if (sort_type[0] == SORT_ALPHABETICALLY) {
 
-        if (sort_type[1] == INCRE) {
+        if (sort_type[1] == INCRE) {// qsort
 
-            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(arr.arr_structs[0]) , INCRE , My_Compare_Str_Alphabetically);
+            qsort (arr.arr_structs , Onegin->num_lines , sizeof (Inf_Lines) , My_Compare_Str_Alphabetically);
+            sort_arr_structs = arr.arr_structs;//(struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(arr.arr_structs[0]) , INCRE , My_Compare_Str_Alphabetically);
             Write_Sort_Files ("Sort_Alpha_Incr_Onegin.txt" , sort_arr_structs , Onegin);
 
         } else if (sort_type[1] == DECRE) {
@@ -44,9 +45,10 @@ int Process_Onegin(Text* Onegin, int* sort_type) {
 
     else if (sort_type[0] == SORT_BY_RHYME) {
 
-        if (sort_type[1] == INCRE) {
+        if (sort_type[1] == INCRE) { //qsort
 
-            sort_arr_structs = (struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(Inf_Lines) , INCRE , My_Compare_Str_Rhyme);
+            qsort (arr.arr_structs , Onegin->num_lines , sizeof (Inf_Lines) , My_Compare_Str_Rhyme);
+            sort_arr_structs = arr.arr_structs;   //(struct Inf_Lines*) Bubble_Sort (arr.arr_structs , Onegin , sizeof(Inf_Lines) , INCRE , My_Compare_Str_Rhyme);
             Write_Sort_Files ("Sort_Rhyme_Incre_Onegin.txt" , sort_arr_structs, Onegin);
 
         } else if (sort_type[1] == DECRE) {
@@ -67,8 +69,6 @@ int Process_Onegin(Text* Onegin, int* sort_type) {
 
         return incomplete_value;
     }
-
-
 
     return complete_value;
 }

@@ -5,6 +5,7 @@
 struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr)
 {
     my_assert (Onegin == NULL);
+    my_assert (arr == NULL);
 
     FILE* fp = Open_File ("Clean_Onegin.txt");
 
@@ -39,9 +40,6 @@ struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr)
             }
         }
     }
-
-
-
 
     return arr->arr_structs;
 }
