@@ -71,6 +71,9 @@ void* Bubble_Sort (void* arr , Text* Onegin , int el_size, int type_compare , My
 //---------------------------------------------------------------------------------------------------------------
 void My_qsort (void* data , int el_size ,  int start , int finish , My_Compare My_compare , int type_compare)
 {
+    my_assert (My_compare == NULL);
+    my_assert (data == NULL);
+
     if (start >= finish)
 
         return;

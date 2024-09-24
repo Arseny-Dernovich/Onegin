@@ -106,6 +106,9 @@ _Bool Check_Characters (char sym)
 
 int Compare_Int (const void* point1 , const void* point2)
 {
+    my_assert(point1 == NULL);
+    my_assert(point2 == NULL);
+
     if (*((const int*) point1) > *((const int*) point2))
 
         return 1;
