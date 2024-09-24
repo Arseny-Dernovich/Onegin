@@ -19,7 +19,7 @@ struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr)
 
     my_assert (arr->arr_structs == NULL);
 
-    size_t line_count = 0;
+    int line_count = 0;
 
     char* line_start = Onegin->text_Onegin;
 

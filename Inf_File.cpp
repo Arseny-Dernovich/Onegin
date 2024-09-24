@@ -41,7 +41,7 @@ int Calculate_Num_Lines_File (FILE* fp , struct Text* Onegin)
     my_assert (Onegin == 0);
     my_assert (fp == NULL);
 
-    size_t num_lines = 0;
+    int num_lines = 0;
     int ch = 0;
 
     while ((ch = getc (fp)) != EOF) {

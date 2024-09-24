@@ -1,9 +1,7 @@
 #include "My_features.h"
 
 
-
-
-int My_Compare_Str_Alphabetically (const void* point1, const void* point2)
+int My_Compare_Str_Alphabetically (const void* point1 , const void* point2)
 {
     my_assert(point1 == NULL);
     my_assert(point2 == NULL);
@@ -51,7 +49,7 @@ int My_Compare_Str_Alphabetically (const void* point1, const void* point2)
 
 
 //----------------------------------------------------------------------------------------------------------------------
-int My_Compare_Str_Rhyme (const void* point1, const void* point2)
+int My_Compare_Str_Rhyme (const void* point1 , const void* point2)
 {
     my_assert(point1 == NULL);
     my_assert(point2 == NULL);
@@ -104,4 +102,19 @@ int My_Compare_Str_Rhyme (const void* point1, const void* point2)
 _Bool Check_Characters (char sym)
 {
     return (isspace (sym) || ispunct (sym) || isdigit (sym));
+}
+
+int Compare_Int (const void* point1 , const void* point2)
+{
+    if (*((const int*) point1) > *((const int*) point2))
+
+        return 1;
+
+    else if (*((const int*) point1) < *((const int*) point2))
+
+        return -1;
+
+    else
+
+        return 0;
 }

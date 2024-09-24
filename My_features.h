@@ -2,6 +2,7 @@
 #define DRA_HEADER
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
@@ -29,8 +30,10 @@
 
 typedef int (*My_Compare) (const void* point1 , const void* point2);
 
+
 struct Text {
-    size_t size , num_lines ;
+    size_t size ;
+    int num_lines ;
     char * text_Onegin;
 };
 
@@ -62,6 +65,9 @@ enum Sort_Type {           // индикаторы типа сортировки
     DECRE = -1
 };
 
+const float RAND_MAX_F = RAND_MAX;
+
+
 const char* const yellow          = "\033[3;33;40m";
 const char* const red             = "\033[3;31;40m";
 const char* const blue_dark       = "\033[3;34;40m";
@@ -77,12 +83,16 @@ FILE* Open_File (const char* filename_read);
 int Write_Sort_Files (const char* filename_write , struct Inf_Lines* arr_structs , Text* Onegin);
 struct Inf_Lines* Filling_Arr_Structs (Text* Onegin , Arr_Structs* arr);
 void* Bubble_Sort (void* arr , Text* Onegin , int el_size , int type_compare , My_Compare My_compare );
+void My_qsort (void* data , int el_size ,  int start , int finish , My_Compare My_compare , int type_compare);
 int My_Compare_Str_Alphabetically (const void* point1, const void* point2);
 int My_Compare_Str_Rhyme (const void* point1, const void* point2);
+int Compare_Int (const void* point1 , const void* point2);
 int Process_Onegin (Text* Onegin , int* sort_type);
 _Bool Check_Characters (char sym);
 void print_usage ();
 void Print_Array_Structs (struct Inf_Lines* arr_structs, size_t num_lines);
+void Swap (void* point1 , void* point2 , int el_size);
+int Random_in_Range (int min , int max);
 
 
 
