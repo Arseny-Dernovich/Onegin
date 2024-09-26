@@ -119,7 +119,7 @@ void My_qsort (void* data , int el_size ,  int start , int finish , My_Compare M
 
     if (i < finish) {
 
-        My_qsort (data , el_size , start , j , My_compare , type_compare);
+        My_qsort (data , el_size , i , finish , My_compare , type_compare);
 
     }
 }
